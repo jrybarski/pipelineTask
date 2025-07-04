@@ -16,29 +16,29 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 echo '📥 Instalowanie zależności npm...'
-                sh 'npm ci'
+                bat 'npm ci'
             }
         }
 
         stage('Run Prettier and ESLint') {
             steps {
                 echo '🎨 Formatowanie i lintowanie kodu...'
-                sh 'npx prettier --check .'
-                sh 'npx eslint .'
+                bat 'npx prettier --check .'
+                bat 'npx eslint .'
             }
         }
 
         stage('Run UI Tests (WDIO)') {
             steps {
                 echo '🧪 Uruchamianie testów E2E WebdriverIO...'
-                sh 'npm run test:ui'
+                bat 'npm run test:ui'
             }
         }
 
         stage('Run API Tests (Newman)') {
             steps {
                 echo '📡 Uruchamianie testów API Postman/Newman...'
-                sh 'npm run api:test'
+                bat 'npm run api:test'
             }
         }
     }
