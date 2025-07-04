@@ -23,7 +23,7 @@ pipeline {
         stage('Run Prettier and ESLint') {
             steps {
                 echo '🎨 Formatowanie i lintowanie kodu...'
-                bat 'npx prettier --check . || echo "Ignoring Prettier errors"'
+                bat 'npx prettier --check . || exit 0'
                 bat 'npx prettier --write .'
                 bat 'npx eslint .'
             }
