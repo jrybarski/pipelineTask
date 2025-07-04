@@ -17,6 +17,7 @@ pipeline {
             steps {
                 echo '📥 Instalowanie zależności npm...'
                 bat 'npm ci'
+                bat 'npm install --save-dev eslint-config-prettier eslint-plugin-prettier'
             }
         }
 
