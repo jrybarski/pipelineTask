@@ -7,7 +7,6 @@ export default defineConfig([
   {
     files: ['**/*.{js,mjs,cjs}'],
     plugins: { js, prettier },
-    extends: ['js/recommended', 'plugin:prettier/recommended'],
     rules: {
       'prettier/prettier': 'error',
     },
