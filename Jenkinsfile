@@ -24,6 +24,7 @@ pipeline {
             steps {
                 echo '🎨 Formatowanie i lintowanie kodu...'
                 bat 'npx prettier --check .'
+                bat 'npx prettier --write .'
                 bat 'npx eslint .'
             }
         }
