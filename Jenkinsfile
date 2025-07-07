@@ -8,14 +8,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo '📦 Klonowanie repozytorium...'
+                echo 'Cloning repo'
                 git branch: 'main', url: 'https://github.com/jrybarski/pipelineTask'
             }
         }
 
         stage('Install dependencies') {
             steps {
-                echo '📥 Instalowanie zależności npm...'
+                echo 'Instaling npm depenencies'
                 bat 'npm ci'
                 bat 'npm install --save-dev eslint-config-prettier eslint-plugin-prettier'
             }
@@ -23,23 +23,23 @@ pipeline {
 
         stage('Run Prettier and ESLint') {
             steps {
-                echo '🎨 Formatowanie i lintowanie kodu...'
+                echo 'Formating and linting code.'
                 bat 'npx prettier --check . || exit 0'
                 bat 'npx prettier --write .'
                 bat 'npx eslint .'
             }
         }
 
-        stage('Run UI Tests (WDIO)') {
+        stage('Run UI Tests (WDIO & Cucumber)') {
             steps {
-                echo '🧪 Uruchamianie testów E2E WebdriverIO...'
+                echo 'Starting test E2E WebdriverIO featured by Cucumber'
                 bat 'npm run test:ui'
             }
         }
 
         stage('Run API Tests (Newman)') {
             steps {
-                echo '📡 Uruchamianie testów API Postman/Newman...'
+                echo 'Starting test API Postman/Newman...'
                 bat 'npm run api-tests'
             }
         }
@@ -47,10 +47,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Pipeline zakończony sukcesem!'
+            echo '✅ Pipeline success!'
         }
         failure {
-            echo '❌ Pipeline nie powiódł się!'
+            echo '❌ Pipeline failed!'
         }
     }
 }
